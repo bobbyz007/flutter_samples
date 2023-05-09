@@ -51,15 +51,60 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a", "armeabi"
+        }
+    }
+
+    signingConfigs {
+        // 正式发布使用签名文件 名字自定义
+        app_key {
+            storeFile file('test.jks')
+            storePassword 'abc123'
+            keyAlias 'key0'
+            keyPassword 'abc123'
+        }
+
+        //      debug调试编译发布使用签名文件 名字自定义
+        debug_app_key {
+            storeFile file('test.jks')
+            storePassword 'abc123'
+            keyAlias 'key0'
+            keyPassword 'abc123'
+        }
     }
 
     buildTypes {
+        debug {
+            //设置签名信息
+            signingConfig signingConfigs.debug_app_key
+            ////是否对代码进行混淆
+            minifyEnabled false
+            //指定混淆的规则文件
+            // proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //是否对APK包执行ZIP对齐优化，减小zip体积，增加运行效率
+            zipAlignEnabled false
+            //在applicationId 中添加了一个后缀，一般使用的不多
+            //applicationIdSuffix 'test'
+            //在applicationId 中添加了一个后缀，一般使用的不多
+            //versionNameSuffix 'test'
+            //是否支持断点调试
+            debuggable true
+        }
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.app_key
+            ////是否对代码进行混淆
+            minifyEnabled false
+            shrinkResources false
+            //指定混淆的规则文件
+            // proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
         }
     }
+    namespace 'com.example.flutter_samples'
 }
 
 flutter {

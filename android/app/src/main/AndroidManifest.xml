@@ -1,5 +1,15 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.flutter_samples">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--    网络请求权限-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--外部文件存储权限-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--位置 后台位置权限-->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <!--位置 设备估算位置权限-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!--位置 精确位置权限-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
    <application
         android:label="flutter_samples"
         android:name="${applicationName}"
